@@ -3,7 +3,6 @@
 import { setMaxIdleHTTPParsers } from 'http';
 import { useRouter } from 'next/navigation';
 import React, { useRef } from 'react';
-//import { Toaster, toast } from 'react-hot-toast';
 import toast, { Toaster } from 'react-hot-toast';
 
 const postBlog = async (
@@ -20,11 +19,6 @@ const postBlog = async (
     return res.json();
 }
 
-const postBlog2 = (
-    title: string | undefined,
-    description: string | undefined) => {
-    return postBlog(title, description);
-}
 
 const PostBlog = () => {
     const router = useRouter();
@@ -36,17 +30,17 @@ const PostBlog = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         toast.promise(
-            postBlog2(titleRef.current?.value, descriptionRef.current?.value),
+            postBlog(titleRef.current?.value, descriptionRef.current?.value),
             {
-                loading: 'Saving...',
-                success: <b>Settings saved!</b>,
-                error: <b>Could not save.</b>,
+                loading: '投稿中...',
+                success: <b>投稿に成功しました</b>,
+                error: <b>投稿に失敗しました</b>,
             }
         );
         // toast.loading("投稿中です・・・");
         // await postBlog(titleRef.current?.value, descriptionRef.current?.value);
         // toast.success("投稿に成功しました！");
-        await sleep(2000);
+        await sleep(1000);
         router.push("/");
         router.refresh();
     };

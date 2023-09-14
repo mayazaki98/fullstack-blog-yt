@@ -15,9 +15,9 @@ export const GET = async(req: Request, res: NextResponse) => {
 
         await connect();
 
-        const posts = await prisma.post.findFirst({where: {id}});
+        const post = await prisma.post.findFirst({where: {id}});
 
-        return NextResponse.json({ message: "Success", posts}, {status: 200});
+        return NextResponse.json({ message: "Success", post}, {status: 200});
     } catch (err) {
         return NextResponse.json({ message: "Error", err}, {status: 500});
     } finally {
