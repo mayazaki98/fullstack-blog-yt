@@ -17,7 +17,9 @@ export async function connect() {
 export const GET = async(req: Request, res: NextResponse) => {
     try {
         await connect();
-        const posts = await prisma.post.findMany();
+        const posts = await prisma.post.findMany({
+            orderBy: {id : 'desc'}
+        });
         return NextResponse.json({ message: "Success", posts}, {status: 200});
     } catch (err) {
         return NextResponse.json({ message: "Error", err}, {status: 500});
